@@ -1,18 +1,20 @@
 //import models
-const userData = require('./userData');
-const postData = require('./postData');
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment')
 
-userData.belongsTo(postData, {
+Comment.belongsTo(User, {
+    foreignKey: 'userId',
+});
+Post.hasMany(Comment, {
     foreignKey: 'postId',
 });
-postData.hasMany(userData, {
-    foreignKey: 'postId',
-});
-userData.belongsTo(postData, {
+Post.belongsTo(User, {
     foreignKey: 'userId',
 })
 
     module.exports = {
-        userData,
-        postData,
+        User,
+        Post,
+        Comment,
     };
