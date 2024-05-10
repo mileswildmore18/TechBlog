@@ -1,0 +1,11 @@
+<section class ="post-page">
+    <div class="post-container">
+        {{#each posts as |post|}} 
+        <article class="post-card">
+            <h2>{{post.post_name}}</h2>
+            <p>{{post.post_content}}</p>
+            <p>{{post.User.user_name}}</p>
+        </article>
+        {{/each}}
+    </div>
+</section>

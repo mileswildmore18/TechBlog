@@ -15,7 +15,11 @@ Post.init(
         post_name: {
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
+        post_content: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         sequelize,
