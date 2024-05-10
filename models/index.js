@@ -2,13 +2,13 @@
 const userData = require('./userData');
 const postData = require('./postData');
 
-userData.belongsto(postData, {
+userData.belongsTo(postData, {
     foreignKey: 'postId',
 });
-postData.hasmany(userData, {
+postData.hasMany(userData, {
     foreignKey: 'postId',
 });
-userData.belongsToMany(postData,{
+userData.belongsTo(postData, {
     foreignKey: 'userId',
 })
 
