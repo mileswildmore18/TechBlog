@@ -45,3 +45,11 @@ li {
 a:hover {
     background-color: rgb(255, 238, 0);
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-left: 0px;
+    margin-right: 0px;
+}

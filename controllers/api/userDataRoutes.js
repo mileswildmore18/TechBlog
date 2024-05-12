@@ -33,16 +33,24 @@ router.get('/', async (req, res) => {
   });
 
   router.post('/', async (req, res) => {
-    // creates a new post
     try {
-      const user = await userData.create(req.body);
+      const dbUserData = await User.create({ //hitting the database
+        username: req.body.username, //store them as user models and password
+        password: req.body.password,
+      });
   
-      res.status(200).json(user);
+      req.session.save(() => { //temporary storage associated with the cookie
+        req.session.loggedIn = true;
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+  //store the data
+        res.status(200).json(dbUserData);
+      });
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   });
-  
   router.put('/:id', async (req, res) => {
     // updates a category by its `id` value
     const user = await userData.update(req.body, {

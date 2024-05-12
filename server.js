@@ -26,7 +26,7 @@ const sess = {
     db: sequelize,
   }),
 }
-
+//middleware for the server
 app.use(session(sess))
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
