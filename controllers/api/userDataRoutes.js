@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { userData, postData } = require('../../models');
+const { User, Post } = require('../../models');
 
 router.get('/', async (req, res) => {
     // finds all postData include its userData
     try {
-      const user = await userData.findAll({
-        include: [{ model: postData }]
+      const user = await User.findAll({
+        //include: [{ model: Post }]
       });
       res.status(200).json(user);
     } catch (err) {
@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 
   router.get('/:id', async (req, res) => {
     try {
-      const user = await userData.findByPk(req.params.id, {
-        include: [{ model: userData }],
+      const user = await User.findByPk(req.params.id, {
+        include: [{ model: Post }],
       });
   
       // displays if no post data is found
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
   router.post('/', async (req, res) => {
     try {
       const dbUserData = await User.create({ //hitting the database
-        username: req.body.username, //store them as user models and password
+        user_name: req.body.username, //store them as user models and password
         password: req.body.password,
       });
   
@@ -53,14 +53,14 @@ router.get('/', async (req, res) => {
   });
   router.put('/:id', async (req, res) => {
     // updates a category by its `id` value
-    const user = await userData.update(req.body, {
+    const user = await User.update(req.body, {
       where: {
         //Gets the tag based on the id given in the request parameters
         id: req.params.id,
       },
     }
     );
-    return res.json(post);
+    return res.json(user);
   }),
   
   
@@ -87,7 +87,7 @@ router.get('/', async (req, res) => {
   
     router.post('/login', async (req, res) => {
       try {
-        const userData = await User.findOne({ where: {username: req.body.username } });
+        const userData = await User.findOne({ where: {user_name: req.body.username } });
     
         if (!userData) {
           res
@@ -117,5 +117,14 @@ router.get('/', async (req, res) => {
       }
     });
 
+    router.post('/logout', (req, res) => {
+      if (req.session.loggedIn) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+      } else {
+        res.status(404).end();
+      }
+    });
   module.exports = router;
   
