@@ -1,6 +1,10 @@
 const newButtons = document.querySelectorAll('.newPost-btn');
 const newForms = document.querySelectorAll('.newPost-form');
 
+app.get('/newpost', (req, res) => {
+    res.render('newPost');
+});
+
 // Attach click event listeners to each new button
 newButtons.forEach((button, index) => {
     button.addEventListener('click', () => {

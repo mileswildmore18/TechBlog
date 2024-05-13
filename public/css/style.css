@@ -3,6 +3,7 @@
 }
 .post-container{
     display: flex;
+    justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
 }
@@ -52,4 +53,10 @@ a:hover {
     flex-direction: column;
     margin-left: 0px;
     margin-right: 0px;
+}
+
+.btn.btn-primary {
+    background-color: #2d3e50;
+    font-size: 40px;
+    color: #d9e9e8;
 }

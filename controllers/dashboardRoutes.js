@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User } = require('../models')
 const withAuth = require('../utils/authGuard')
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   // Send the rendered Handlebars.js template back as the response
   try {
     const allPosts = await Post.findAll({
@@ -23,7 +23,7 @@ console.log(posts)
 //   if (!req.session.loggedIn) {
 //     res.redirect('/login');
 //   } else {
-//     // If the user is logged in, allow them to view the gallery
+//     // If the user is logged in, allow them to view the blogs
 //     try {
 //       const allPosts = await Post.findByPk(req.params.id, {
 //         include: [
@@ -46,23 +46,23 @@ console.log(posts)
 //   }
 // });
 
-// router.get('/post/:id', withAuth, async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//   if (!req.session.loggedIn) {
-//     res.redirect('/login');
-//   } else {
-//     // If the user is logged in, allow them to view the painting
-//     try {
-//       const postData = await Post.findByPk(req.params.id);
+router.get('/post/:id', withAuth, async (req, res) => {
+  // If the user is not logged in, redirect the user to the login page
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+    // If the user is logged in, allow them to view the blogs
+    try {
+      const postData = await Post.findByPk(req.params.id);
 
-//       const post = postData.get({ plain: true });
+      const post = postData.get({ plain: true });
 
-//       res.render('comment', { post, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-//   }
-// });
+      res.render('comment', { post, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+});
 
 module.exports = router;
