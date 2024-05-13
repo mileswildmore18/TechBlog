@@ -6,7 +6,7 @@
 Welcome to the TechBlog, where you can see blogs that are monitored from the back end and are provided new data from the front end of the website. You will see the experience of being able to login or signup on the website to provide your own blogs as well as creating new posts, editing posts and deleting the posts anytime you want. I learned about using routes, models, and handlebars that allow the back end to communicate with the front end with the users that post blod data and where it stores the data into the website for when they log in again. If the user is not logged in, when they click on the dashboard, they will be required to login or sign up to access the blogs on the website. The login is made to be set at a specific times for how long the user is allowed to be in unless they are away from the computer for a good amount of time for when they have to login again. All of the passwords anyone uses and creates to access the blog creations will have their passwords encrypt with the bcrypt node function in the background so it is harder to crack the user's password. This website also has APIs that have information stored by the users on the front end and are saved for next time they login Enjoy your blog entires on the TechBlog!
 
 ## Link
-
+https://techblog-zsim.onrender.com
 
 ## Table of Contents
  * [Description](#description)
