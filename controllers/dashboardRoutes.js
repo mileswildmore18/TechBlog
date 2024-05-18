@@ -4,8 +4,11 @@ const withAuth = require('../utils/authGuard')
 router.get('/', withAuth, async (req, res) => {
   // Send the rendered Handlebars.js template back as the response
   try {
+    console.log("Test")
     const allPosts = await Post.findAll({
-      include: [User]
+      where: {
+        userId: req.session.user_id,
+      }
     })
     const posts = allPosts.map((post) => post.get({ plain: true }))
 console.log(posts)
@@ -45,6 +48,10 @@ console.log(posts)
 //     }
 //   }
 // });
+
+router.get('/newpost', (req, res) => {
+  res.render('newPost');
+});
 
 router.get('/post/:id', withAuth, async (req, res) => {
   // If the user is not logged in, redirect the user to the login page

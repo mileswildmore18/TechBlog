@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { postData, userData } = require('../../models');
+const { Post, User } = require('../../models');
 
 router.get('/', async (req, res) => {
     // finds all postData include its userData
@@ -32,13 +32,15 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/', async (req, res) => {console.log("Hello")
     // creates a new post
+    // const {title, content} = req.body
     try {
-      const post = await postData.create(req.body);
-  
+      const post = await Post.create(req.body);
+  console.log(post, 'postRoute=======')
       res.status(200).json(post);
     } catch (err) {
+      console.error(err)
       res.status(500).json(err);
     }
   });
